@@ -11,6 +11,7 @@ import RegisterNavigators from './src/navigators/RegisterNavigators';
 function App(): React.JSX.Element {
   useDeviceContext(tw);
 
+
   const isLogedIn = false;
   return (
     <SafeAreaView style={tw`flex-1 bg-white`}>
