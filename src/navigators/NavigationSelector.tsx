@@ -6,7 +6,6 @@ import RegisterNavigators from './RegisterNavigators';
 import tw from '../lib/tailwind';
 import {useQuery} from '@tanstack/react-query';
 import {getUser} from '../lib/api';
-import SplashScreen from 'react-native-splash-screen';
 
 
 
