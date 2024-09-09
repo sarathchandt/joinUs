@@ -3,3 +3,8 @@ export const isValidEmail=(email:string)=> {
     return regex.test(email);
   }
   
+
+  export const isValidOTP=(otp:string)=> {
+    const regex = /^[0-9]{4}$/; 
+    return regex.test(otp)
+  }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as Keychain from 'react-native-keychain';
+import { getTokens } from './api';
 
 const instance = axios.create({
     baseURL: 'http://192.168.124.186:3000',
@@ -8,18 +9,20 @@ const instance = axios.create({
 export const refreshToken = async () => {
 
     
-    const credentials:any = (await Keychain.getGenericPassword()) || "";
+    const credentials = await getTokens();    
     const token = credentials.refreshToken;
-  
-    const response = await instance.post("getNewAccessToken", {
-      refreshToken: token,
-    });
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    const response = await instance.get("/getNewAccessToken");
     const accessToken = response?.data?.token;
     if (!accessToken) {
       await Keychain.resetGenericPassword();
       return;
     }
-    await Keychain.setGenericPassword("accessToken", accessToken);
+    const tokens = {
+      accessToken: accessToken,
+      refreshToken: credentials.refreshToken,
+  };
+  await Keychain.setGenericPassword("tokens", JSON.stringify(tokens));
     return accessToken;
   };
   
@@ -32,13 +35,7 @@ export const refreshToken = async () => {
         originalRequest._retry = true;
         try {
           const accessToken: any = await refreshToken();
-          // const accessToken = response?.data?.message;
-          // if (!accessToken) {
-          //   await SecureStore.deleteItemAsync("UserAccessTokenToken");
-          //   await SecureStore.deleteItemAsync("UserRefreshToken");
-          //   return;
-          // }
-          // await SecureStore.setItemAsync("UserAccessTokenToken", accessToken);
+        
           if (!accessToken) return;
   
           instance.defaults.headers.common[
