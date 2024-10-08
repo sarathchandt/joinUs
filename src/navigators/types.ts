@@ -14,7 +14,10 @@ export type RegisterParamList = {
 
 
 export type RootStackParamList = {
-  home:undefined
+  home:undefined;
+  initialScreenMeet:{
+    meetId:string;
+  };
 }
 
 export type RootScreenProps<T extends keyof RootStackParamList> =

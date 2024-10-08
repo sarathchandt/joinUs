@@ -3,7 +3,7 @@ import * as Keychain from 'react-native-keychain';
 import { getTokens } from './api';
 
 const instance = axios.create({
-    baseURL: 'http://192.168.124.186:3000',
+    baseURL: 'http://192.168.71.186:3000',
 })
 
 export const refreshToken = async () => {

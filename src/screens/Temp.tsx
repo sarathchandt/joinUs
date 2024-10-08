@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native';
 import { RTCView, mediaDevices } from 'react-native-webrtc';
+import tw from '../lib/tailwind';
 
 const Temp = () => {
 
@@ -12,7 +13,9 @@ const Temp = () => {
                     audio: false,
                     video: {
                         facingMode: 'user',
+
                     },
+                    
                 });
                 setLocalStream(stream);
             } catch (error) {
@@ -23,7 +26,7 @@ const Temp = () => {
         getUserMedia();
     }, []);
   return (
-    <View style={{ flex: 1 }}>
+    <View style={[tw`h-[440px]`,{ flex: 1 }]}>
     {localStream && (
         <RTCView
         mirror
