@@ -7,6 +7,8 @@ type State = {
     setUserEmailAddress: (value: string) => void;
     userName: string;
     setUserName: (value: string) => void;
+    socket: any;
+    setSocket: (value: any) => void;
 
 };
 
@@ -17,4 +19,6 @@ export const useStore = create<State>((set) => ({
     setUserEmailAddress: (value) => set({ userEmailAddress: value }),
     userName: '',
     setUserName: (value) => set({ userName: value }),
+    socket: null,
+    setSocket: (value) => set({ socket: value }),
 }));
